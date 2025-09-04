@@ -1,0 +1,68 @@
+<div class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+  
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">
+          Criar Nova Conta
+        </h1>
+        <p class="mt-4 max-w-2xl mx-auto text-xl text-emerald-700 font-semibold">
+          Ficamos felizes em ter você na nossa comunidade.
+        </p>
+      </div>
+  
+      <div class="mt-12 max-w-2xl mx-auto">
+        <form (ngSubmit)="onSubmit()" #cadastroForm="ngForm" class="space-y-6 bg-white p-8 rounded-xl shadow-lg border-t-4 border-emerald-500">
+  
+          <div>
+            <label for="nome" class="block text-sm font-medium text-gray-700">Nome Completo</label>
+            <input id="nome" name="nome" type="text" [(ngModel)]="formData.nome" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Seu nome completo">
+          </div>
+  
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input id="email" name="email" type="email" [(ngModel)]="formData.email" required email class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Digite seu melhor email">
+          </div>
+          
+          <div>
+            <label for="senha" class="block text-sm font-medium text-gray-700">Senha</label>
+            <input id="senha" name="senha" type="password" [(ngModel)]="formData.senha" required minlength="6" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Mínimo 6 caracteres">
+          </div>
+  
+          <div>
+            <label for="confirmarSenha" class="block text-sm font-medium text-gray-700">Confirmar Senha</label>
+            <input id="confirmarSenha" name="confirmarSenha" type="password" [(ngModel)]="formData.confirmarSenha" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Repita a senha">
+          </div>
+  
+          <div class="flex items-start pt-2">
+            <div class="flex items-center h-5">
+              <input id="aceitouTermos" name="aceitouTermos" type="checkbox" [(ngModel)]="formData.aceitouTermos" required class="focus:ring-emerald-500 h-4 w-4 text-emerald-600 border-gray-300 rounded">
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="aceitouTermos" class="font-medium text-gray-700">
+                Eu li e aceito os <a href="#" class="text-emerald-600 hover:text-emerald-500">Termos de Uso</a>.
+              </label>
+            </div>
+          </div>
+  
+          <div class="pt-4">
+            <button
+              type="submit"
+              [disabled]="!cadastroForm.valid"
+              class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:bg-emerald-300 disabled:cursor-not-allowed transition-colors"
+            >
+              Finalizar Cadastro
+            </button>
+          </div>
+  
+          <p class="text-sm text-center text-gray-500 pt-4">
+            Já tem uma conta? 
+            <a routerLink="/login" class="font-medium text-emerald-600 hover:text-emerald-500">
+              Faça login
+            </a>
+          </p>
+  
+        </form>
+      </div>
+  
+    </div>
+  </div>

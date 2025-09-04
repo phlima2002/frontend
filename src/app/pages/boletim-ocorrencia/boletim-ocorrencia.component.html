@@ -1,0 +1,122 @@
+<div class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+  
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">
+          Boletim de Ocorrência
+        </h1>
+        <p class="mt-4 max-w-2xl mx-auto text-xl text-emerald-700 font-semibold">
+          Este é um documento oficial. Preencha as informações com atenção e veracidade.
+        </p>
+      </div>
+  
+      <div class="mt-12 max-w-2xl mx-auto">
+        <form (ngSubmit)="onSubmit()" #boForm="ngForm" class="space-y-10 bg-white p-8 rounded-xl shadow-lg border-t-4 border-emerald-500">
+  
+          <fieldset class="space-y-6">
+            <legend class="text-2xl font-bold text-gray-800 border-b pb-2 mb-4">1. Seus Dados</legend>
+            
+            <div>
+              <label for="comunicanteNome" class="block text-sm font-medium text-gray-700">Nome Completo</label>
+              <input type="text" name="comunicanteNome" [(ngModel)]="formData.comunicanteNome" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Seu nome completo">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="comunicanteDataNasc" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
+                <input type="date" name="comunicanteDataNasc" [(ngModel)]="formData.comunicanteDataNasc" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400">
+              </div>
+              <div>
+                <label for="comunicanteCPF" class="block text-sm font-medium text-gray-700">CPF</label>
+                <input type="text" name="comunicanteCPF" [(ngModel)]="formData.comunicanteCPF" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="000.000.000-00">
+              </div>
+            </div>
+            <div>
+              <label for="comunicanteEndereco" class="block text-sm font-medium text-gray-700">Endereço Completo</label>
+              <input type="text" name="comunicanteEndereco" [(ngModel)]="formData.comunicanteEndereco" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Rua, número, bairro, cidade...">
+            </div>
+            <div>
+              <label for="comunicanteTelefone" class="block text-sm font-medium text-gray-700">Telefone para Contato</label>
+              <input type="tel" name="comunicanteTelefone" [(ngModel)]="formData.comunicanteTelefone" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="(00) 90000-0000">
+            </div>
+          </fieldset>
+  
+          <fieldset class="space-y-6">
+            <legend class="text-2xl font-bold text-gray-800 border-b pb-2 mb-4">2. Detalhes do Fato</legend>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="fatoData" class="block text-sm font-medium text-gray-700">Data do Fato</label>
+                <input type="date" name="fatoData" [(ngModel)]="formData.fatoData" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400">
+              </div>
+              <div>
+                <label for="fatoHora" class="block text-sm font-medium text-gray-700">Hora Aproximada</label>
+                <input type="time" name="fatoHora" [(ngModel)]="formData.fatoHora" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400">
+              </div>
+            </div>
+            <div>
+              <label for="fatoLocal" class="block text-sm font-medium text-gray-700">Local do Fato</label>
+              <input type="text" name="fatoLocal" [(ngModel)]="formData.fatoLocal" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Endereço onde tudo aconteceu">
+            </div>
+            <div>
+              <label for="fatoDescricao" class="block text-sm font-medium text-gray-700">Descrição detalhada do que aconteceu</label>
+              <textarea name="fatoDescricao" [(ngModel)]="formData.fatoDescricao" required rows="6" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Relate com o máximo de detalhes possível, em ordem cronológica."></textarea>
+            </div>
+          </fieldset>
+  
+          <fieldset class="space-y-6">
+            <legend class="text-2xl font-bold text-gray-800 border-b pb-2 mb-4">3. Informações do Agressor</legend>
+            <div>
+              <label for="agressorNome" class="block text-sm font-medium text-gray-700">Nome do Agressor (se souber)</label>
+              <input type="text" name="agressorNome" [(ngModel)]="formData.agressorNome" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Nome completo ou apelido">
+            </div>
+            <div>
+              <label for="agressorVinculo" class="block text-sm font-medium text-gray-700">Qual seu vínculo com ele?</label>
+              <input type="text" name="agressorVinculo" [(ngModel)]="formData.agressorVinculo" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Ex: Marido, ex-namorado, pai, vizinho...">
+            </div>
+             <div>
+              <label for="agressorDescricao" class="block text-sm font-medium text-gray-700">Descrição do Agressor</label>
+              <textarea name="agressorDescricao" [(ngModel)]="formData.agressorDescricao" rows="3" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Características físicas, roupas que usava, etc."></textarea>
+            </div>
+          </fieldset>
+  
+          <fieldset class="space-y-4">
+            <legend class="text-2xl font-bold text-gray-800 border-b pb-2 mb-4">4. Medidas Protetivas de Urgência</legend>
+            <p class="text-sm text-gray-600">Marque as medidas que você deseja solicitar à justiça. Elas visam garantir sua segurança.</p>
+            <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <input id="medida_afastamento" name="medida_afastamento" type="checkbox" [(ngModel)]="formData.medidasProtetivas.afastamentoLar" class="focus:ring-emerald-500 h-4 w-4 text-emerald-600 border-gray-300 rounded">
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="medida_afastamento" class="font-medium text-gray-700">Afastamento do agressor do lar</label>
+              </div>
+            </div>
+             <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <input id="medida_contato" name="medida_contato" type="checkbox" [(ngModel)]="formData.medidasProtetivas.proibicaoContato" class="focus:ring-emerald-500 h-4 w-4 text-emerald-600 border-gray-300 rounded">
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="medida_contato" class="font-medium text-gray-700">Proibição de contato do agressor com você e seus familiares</label>
+              </div>
+            </div>
+             <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <input id="medida_locais" name="medida_locais" type="checkbox" [(ngModel)]="formData.medidasProtetivas.proibicaoLocais" class="focus:ring-emerald-500 h-4 w-4 text-emerald-600 border-gray-300 rounded">
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="medida_locais" class="font-medium text-gray-700">Proibição do agressor de frequentar determinados lugares (sua casa, trabalho, etc.)</label>
+              </div>
+            </div>
+          </fieldset>
+          
+          <div class="pt-5">
+            <button 
+              type="submit" 
+              [disabled]="!boForm.valid"
+              class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:bg-emerald-300 disabled:cursor-not-allowed transition-colors">
+              Registrar Boletim de Ocorrência
+            </button>
+          </div>
+        </form>
+      </div>
+  
+    </div>
+  </div>

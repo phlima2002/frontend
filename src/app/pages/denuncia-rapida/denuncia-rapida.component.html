@@ -1,0 +1,102 @@
+<div class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+  
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">
+          Denúncia Rápida
+        </h1>
+        <p class="mt-4 max-w-2xl mx-auto text-xl text-emerald-700 font-semibold">
+          Preencha o máximo de informações que puder. Sua segurança é nossa prioridade.
+        </p>
+      </div>
+  
+      <div class="mt-12 max-w-2xl mx-auto">
+        <form (ngSubmit)="onSubmit()" #denunciaForm="ngForm" class="space-y-8 bg-white p-8 rounded-xl shadow-lg border-t-4 border-emerald-500">
+  
+          <input type="hidden" name="dataHora" [(ngModel)]="formData.dataHora">
+  
+          <div>
+            <label for="tipoViolencia" class="block text-sm font-medium text-gray-700">Tipo de Violência (se souber)</label>
+            <select id="tipoViolencia" name="tipoViolencia" [(ngModel)]="formData.tipoViolencia" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm">
+              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="fisica">Física</option>
+              <option value="psicologica">Psicológica / Emocional</option>
+              <option value="sexual">Sexual</option>
+              <option value="patrimonial">Patrimonial</option>
+              <option value="moral">Moral</option>
+              <option value="nao_sei">Não sei / Outro</option>
+            </select>
+          </div>
+  
+          <fieldset>
+            <legend class="block text-sm font-medium text-gray-700">Você é a vítima?</legend>
+            <div class="mt-2 space-x-6 flex">
+              <div class="flex items-center">
+                <input id="vitima_sim" name="eAVitima" type="radio" value="sim" [(ngModel)]="formData.eAVitima" class="focus:ring-emerald-500 h-4 w-4 text-emerald-600 border-gray-300">
+                <label for="vitima_sim" class="ml-3 block text-sm font-medium text-gray-700">Sim</label>
+              </div>
+              <div class="flex items-center">
+                <input id="vitima_nao" name="eAVitima" type="radio" value="nao" [(ngModel)]="formData.eAVitima" class="focus:ring-emerald-500 h-4 w-4 text-emerald-600 border-gray-300">
+                <label for="vitima_nao" class="ml-3 block text-sm font-medium text-gray-700">Não, estou denunciando por outra pessoa</label>
+              </div>
+            </div>
+          </fieldset>
+          
+          <fieldset>
+            <legend class="block text-sm font-medium text-gray-700">O agressor está armado?</legend>
+            <div class="mt-2 space-x-6 flex">
+              <div class="flex items-center">
+                <input id="armado_sim" name="agressorArmado" type="radio" value="sim" [(ngModel)]="formData.agressorArmado" class="focus:ring-emerald-500 h-4 w-4 text-emerald-600 border-gray-300">
+                <label for="armado_sim" class="ml-3 block text-sm font-medium text-gray-700">Sim</label>
+              </div>
+              <div class="flex items-center">
+                <input id="armado_nao" name="agressorArmado" type="radio" value="nao" [(ngModel)]="formData.agressorArmado" class="focus:ring-emerald-500 h-4 w-4 text-emerald-600 border-gray-300">
+                <label for="armado_nao" class="ml-3 block text-sm font-medium text-gray-700">Não</label>
+              </div>
+               <div class="flex items-center">
+                <input id="armado_nao_sei" name="agressorArmado" type="radio" value="nao_sei" [(ngModel)]="formData.agressorArmado" class="focus:ring-emerald-500 h-4 w-4 text-emerald-600 border-gray-300">
+                <label for="armado_nao_sei" class="ml-3 block text-sm font-medium text-gray-700">Não sei</label>
+              </div>
+            </div>
+          </fieldset>
+  
+          <div>
+            <label for="localizacao" class="block text-sm font-medium text-gray-700">Localização da Ocorrência</label>
+            <input type="text" name="localizacao" id="localizacao" [(ngModel)]="formData.localizacao" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Endereço, ponto de referência...">
+          </div>
+  
+          <div>
+            <label for="vinculoAgressor" class="block text-sm font-medium text-gray-700">Vínculo com o agressor</label>
+            <input type="text" name="vinculoAgressor" id="vinculoAgressor" [(ngModel)]="formData.vinculoAgressor" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Ex: Cônjuge, ex-companheiro, pai, irmão...">
+          </div>
+          
+          <div>
+            <label for="generoAgressor" class="block text-sm font-medium text-gray-700">Gênero do Agressor</label>
+            <select id="generoAgressor" name="generoAgressor" [(ngModel)]="formData.generoAgressor" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm">
+              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
+              <option value="outro">Outro</option>
+              <option value="nao_sei">Não sei</option>
+            </select>
+          </div>
+  
+          <div>
+            <label for="descricaoAgressor" class="block text-sm font-medium text-gray-700">Descrição do Agressor</label>
+            <textarea id="descricaoAgressor" name="descricaoAgressor" [(ngModel)]="formData.descricaoAgressor" required rows="4" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm placeholder-gray-400" placeholder="Características físicas, roupas, etc."></textarea>
+          </div>
+  
+          <div class="pt-5">
+            <button 
+              type="submit" 
+              [disabled]="!denunciaForm.valid"
+              class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:bg-red-300 disabled:cursor-not-allowed transition-colors">
+              ENVIAR ALERTA URGENTE
+            </button>
+          </div>
+          
+        </form>
+      </div>
+  
+    </div>
+  </div>
