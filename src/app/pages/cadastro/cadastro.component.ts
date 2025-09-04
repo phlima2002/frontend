@@ -1,5 +1,3 @@
-// src/app/pages/cadastro/cadastro.component.ts
-
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -30,7 +28,6 @@ export class CadastroComponent {
       return;
     }
 
-    // Lógica futura de cadastro com o backend
     console.log('Dados do cadastro:', this.formData);
     alert('Cadastro realizado com sucesso! Você será redirecionado para o login.');
     this.router.navigate(['/login']);
