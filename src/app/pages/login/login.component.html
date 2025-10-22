@@ -6,7 +6,7 @@
         <p class="mt-2 text-gray-500">Bem-vindo de volta! Faça login para continuar.</p>
       </div>
   
-      <form class="space-y-6" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <form class="space-y-6" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
   
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
@@ -23,6 +23,7 @@
               required
               class="w-full py-3 pl-10 pr-4 text-gray-900 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="Digite seu endereço de email"
+              ngModel
             >
           </div>
         </div>
@@ -42,6 +43,7 @@
               required
               class="w-full py-3 pl-10 pr-4 text-gray-900 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               placeholder="Digite sua senha"
+              ngModel
             >
           </div>
         </div>

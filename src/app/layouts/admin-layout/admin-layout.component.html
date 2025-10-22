@@ -1,0 +1,9 @@
+<nav style="background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between;">
+    <h3>Painel de Administração</h3>
+    <a [routerLink]="['/admin/dashboard']" style="color: white; text-decoration: none;">Ver Denúncias</a>
+    <button (click)="logout()" class="cursor-pointer" >Sair</button>
+  </nav>
+  
+  <main style="padding: 1rem;">
+    <router-outlet></router-outlet>
+  </main>
