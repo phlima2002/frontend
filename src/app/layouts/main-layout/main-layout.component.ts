@@ -19,7 +19,6 @@ export class MainLayoutComponent {
   }
 
   logout(): void {
-    // Fecha o menu antes de deslogar, para não ficar aberto na tela de login
     this.isMenuOpen = false; 
     sessionStorage.removeItem('userRole');
     this.router.navigate(['/login']);

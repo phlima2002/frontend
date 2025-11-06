@@ -12,7 +12,7 @@ export class AdminLayoutComponent {
   router = inject(Router);
 
   logout() {
-    sessionStorage.removeItem('userRole'); // Limpa a sessão
+    sessionStorage.removeItem('userRole');
     this.router.navigate(['/login']);
   }
 }

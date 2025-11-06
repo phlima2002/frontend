@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core'; // <-- Adicionado inject
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { DenunciaService } from '../../services/denuncia.service'; // <-- Importar o serviço
+import { DenunciaService } from '../../services/denuncia.service';
 
 @Component({
   selector: 'app-boletim-ocorrencia',
@@ -11,8 +11,9 @@ import { DenunciaService } from '../../services/denuncia.service'; // <-- Import
   styleUrl: './boletim-ocorrencia.component.css'
 })
 export class BoletimOcorrenciaComponent {
-  // Injetar o serviço de denúncias
   private denunciaService = inject(DenunciaService);
+
+  public isSubmitting = false;
 
   formData = {
     comunicanteNome: '',
@@ -37,24 +38,35 @@ export class BoletimOcorrenciaComponent {
   };
 
   onSubmit(): void {
-    // 1. Criar o objeto para salvar, incluindo o tipo
     const boParaSalvar = {
       tipo: 'Boletim de Ocorrência',
-      ...this.formData // Copia todos os dados do formulário
+      ...this.formData 
     };
 
-    // 2. Chamar o serviço para adicionar o B.O.
-    this.denunciaService.addDenuncia(boParaSalvar);
+    this.isSubmitting = true;
 
-    // 3. Dar feedback ao usuário
-    alert('Boletim de Ocorrência registrado com sucesso. Você receberá uma cópia por e-mail e as informações foram encaminhadas para a delegacia competente.');
-    console.log('Dados do B.O.:', this.formData);
-
-    // 4. Limpar o formulário
-    this.resetForm();
+    // --- MUDANÇA AQUI ---
+    // A chamada ao serviço agora é assíncrona, usamos .subscribe()
+    this.denunciaService.addDenuncia(boParaSalvar).subscribe({
+      next: (resposta) => {
+        // Sucesso
+        console.log('Resposta do servidor:', resposta);
+        alert('Boletim de Ocorrência registrado com sucesso.');
+        this.resetForm();
+        this.isSubmitting = false;
+      },
+      error: (erro) => {
+        // Erro
+        console.error('Erro ao registrar B.O.:', erro);
+        // Tenta mostrar uma mensagem de erro mais específica, se o backend enviar
+        const msgErro = erro.error?.message || 'Houve um erro ao registrar seu B.O.';
+        alert(msgErro);
+        this.isSubmitting = false;
+      }
+    });
+    // --- FIM DA MUDANÇA ---
   }
 
-  // Método para redefinir o formulário para seu estado inicial
   private resetForm(): void {
     this.formData = {
       comunicanteNome: '',

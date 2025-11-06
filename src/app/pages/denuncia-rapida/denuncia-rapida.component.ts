@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core'; // <-- Adicionado inject
+import { Component, inject } from '@angular/core'; 
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
-import { DenunciaService } from '../../services/denuncia.service'; // <-- Importar o serviço
+import { DenunciaService } from '../../services/denuncia.service';
 
 @Component({
   selector: 'app-denuncia-rapida',
@@ -11,8 +11,10 @@ import { DenunciaService } from '../../services/denuncia.service'; // <-- Import
   styleUrl: './denuncia-rapida.component.css'
 })
 export class DenunciaRapidaComponent {
-  // Injetar o serviço de denúncias
   private denunciaService = inject(DenunciaService);
+
+  // --- ADICIONADO ---
+  public isSubmitting = false;
 
   formData = {
     dataHora: new Date().toISOString(),
@@ -26,24 +28,32 @@ export class DenunciaRapidaComponent {
   };
 
   onSubmit(): void {
-    // 1. Criar o objeto para salvar, incluindo o tipo
     const denunciaParaSalvar = {
       tipo: 'Denúncia Rápida',
-      ...this.formData // Copia todos os dados do formulário
+      ...this.formData 
     };
-
-    // 2. Chamar o serviço para adicionar a denúncia
-    this.denunciaService.addDenuncia(denunciaParaSalvar);
     
-    // 3. Dar feedback ao usuário
-    alert('Denúncia rápida enviada com sucesso! As autoridades competentes serão notificadas.');
-    console.log('Dados do formulário de denúncia rápida:', this.formData);
+    // --- MUDANÇA AQUI ---
+    this.isSubmitting = true; // Desabilita o botão
 
-    // 4. Limpar o formulário
-    this.resetForm();
+    this.denunciaService.addDenuncia(denunciaParaSalvar).subscribe({
+      next: (resposta) => {
+        // Sucesso
+        console.log('Resposta do servidor:', resposta);
+        alert('Denúncia rápida enviada com sucesso! As autoridades competentes serão notificadas.');
+        this.resetForm();
+        this.isSubmitting = false; // Reabilita o botão
+      },
+      error: (erro) => {
+        // Erro
+        console.error('Erro ao enviar denúncia:', erro);
+        const msgErro = erro.error?.message || 'Houve um erro ao enviar sua denúncia.';
+        alert(msgErro);
+        this.isSubmitting = false; // Reabilita o botão
+      }
+    });
   }
 
-  // Método para redefinir o formulário para seu estado inicial
   private resetForm(): void {
     this.formData = {
       dataHora: new Date().toISOString(),
@@ -57,3 +67,4 @@ export class DenunciaRapidaComponent {
     };
   }
 }
+

@@ -89,9 +89,12 @@
           <div class="pt-5">
             <button 
               type="submit" 
-              [disabled]="!denunciaForm.valid"
+              [disabled]="!denunciaForm.valid || isSubmitting"
               class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:bg-red-300 disabled:cursor-not-allowed transition-colors">
-              ENVIAR ALERTA URGENTE
+              
+              <span *ngIf="!isSubmitting">ENVIAR ALERTA URGENTE</span>
+              <span *ngIf="isSubmitting">Enviando...</span>
+
             </button>
           </div>
           

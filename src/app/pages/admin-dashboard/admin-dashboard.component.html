@@ -4,29 +4,59 @@
   realizados pelos usuários.
 </p>
 
-<div *ngIf="denuncias.length === 0" class="text-gray-500 mt-4 p-4 border rounded-md text-center">
-  Nenhuma denúncia para exibir no momento.
+<!-- 1. Adicionado estado de Carregamento (isLoading) -->
+<div *ngIf="isLoading" class="text-gray-500 mt-4 p-4 border rounded-md text-center">
+  Carregando denúncias...
 </div>
 
-<div 
-  *ngFor="let denuncia of denuncias" 
-  class="border border-gray-300 p-4 rounded-md shadow-sm mt-4"
->
-  
-  <div class="flex justify-between items-center">
-    
-    <div>
-      <strong class="text-lg text-gray-900">Denúncia #{{ denuncia.id }}</strong>
-      <p class="text-sm text-gray-600">Tipo: {{ denuncia.tipo }}</p>
-    </div>
-    
-    <button 
-      (click)="deletarDenuncia(denuncia.id)"
-      class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-400"
-    >
-      Deletar
-    </button>
+<!-- 2. Adicionado estado de Erro (erro) -->
+<div *ngIf="erro" class="text-red-600 mt-4 p-4 border border-red-300 bg-red-50 rounded-md text-center">
+  {{ erro }}
+</div>
+
+<!-- 3. Adicionado wrapper para mostrar o conteúdo apenas quando não estiver carregando e não houver erro -->
+<div *ngIf="!isLoading && !erro">
+
+  <!-- Bloco de "Nenhuma denúncia" (sem alterações) -->
+  <div *ngIf="denuncias.length === 0" class="text-gray-500 mt-4 p-4 border rounded-md text-center">
+    Nenhuma denúncia para exibir no momento.
   </div>
-  
-  <p class="mt-2 text-gray-800">{{ denuncia.descricao }}</p>
+
+  <!-- Loop *ngFor (com alterações internas) -->
+  <div 
+    *ngFor="let denuncia of denuncias" 
+    class="border border-gray-300 p-4 rounded-md shadow-sm mt-4"
+  >
+    
+    <div class="flex justify-between items-center">
+      
+      <div>
+        <strong class="text-lg text-gray-900">Denúncia #{{ denuncia.id }}</strong>
+        <!-- 4. Adicionado um "badge" de tipo, para clareza -->
+        <span [ngClass]="denuncia.tipo === 'Denúncia Rápida' ? 'bg-yellow-200 text-yellow-800' : 'bg-blue-200 text-blue-800'"
+              class="text-xs font-semibold ml-2 px-2.5 py-0.5 rounded-full">
+          {{ denuncia.tipo }}
+        </span>
+      </div>
+      
+      <button 
+        (click)="deletarDenuncia(denuncia.id, denuncia.tipo)"
+        class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-400"
+      >
+        Deletar
+      </button>
+    </div>
+
+    <!-- 6. Adicionada a Data (usando o campo correto para cada tipo) -->
+    <p class="text-sm text-gray-500 mt-2">
+      Data: 
+      {{ (denuncia.tipo === 'Denúncia Rápida' ? denuncia.data_hora : denuncia.fato_data) | date: 'dd/MM/yyyy HH:mm' }}
+    </p>
+    
+    <!-- 7. Corrigido o campo de descrição (usando o campo correto para cada tipo) -->
+    <p class="mt-2 text-gray-800">
+      {{ (denuncia.tipo === 'Denúncia Rápida' ? denuncia.descricao_agressor : denuncia.fato_descricao) | slice:0:200 }}...
+    </p>
+  </div>
+
 </div>

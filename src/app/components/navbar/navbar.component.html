@@ -1,13 +1,10 @@
-<!-- Usando o seu design sugerido com a funcionalidade de menu adicionada -->
 <nav class="bg-white shadow-md sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <!-- Logo -->
       <div class="flex-shrink-0">
         <a routerLink="/sobre" class="text-2xl font-bold text-emerald-600">DenunciasJá</a>
       </div>
 
-      <!-- Links de Navegação (Desktop) -->
       <div class="hidden md:block">
         <div class="ml-10 flex items-baseline space-x-4">
           <a routerLink="/sobre" routerLinkActive="text-emerald-500 border-b-2 border-emerald-500" [routerLinkActiveOptions]="{exact: true}" class="text-gray-600 hover:text-emerald-500 px-3 py-2 text-sm font-medium">Sobre</a>
@@ -16,9 +13,7 @@
         </div>
       </div>
 
-      <!-- Menu de Usuário e Hamburguer -->
       <div class="flex items-center">
-        <!-- Menu de Usuário (Desktop) -->
         <div class="hidden md:block ml-4 relative">
           <div>
             <button (click)="toggleMenu()" type="button" class="cursor-pointer max-w-xs bg-white rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">
@@ -34,7 +29,6 @@
           </div>
         </div>
         
-        <!-- Botão Hamburguer (Mobile) -->
         <div class="-mr-2 flex md:hidden">
           <button (click)="toggleMenu()" type="button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
             <span class="sr-only">Abrir menu principal</span>
@@ -50,7 +44,6 @@
     </div>
   </div>
 
-  <!-- Menu Dropdown (Mobile) -->
   <div *ngIf="isMenuOpen" class="md:hidden">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
       <a routerLink="/sobre" (click)="toggleMenu()" routerLinkActive="bg-gray-100 text-emerald-600" [routerLinkActiveOptions]="{exact: true}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700">Sobre</a>
